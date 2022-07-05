@@ -47,12 +47,17 @@ router.get("/facebook/callback",passport.authenticate("facebook", {
   })
 );
 
-router.get("/linkedin", passport.authenticate("linkedin", { scope: ['r_emailaddress', 'r_liteprofile'] }),()=>{console.log("check one")});
 
-router.get("/linkedin/callback",passport.authenticate("linkedin", {
+router.get("/linkedin", passport.authenticate("linkedin", { scope: ['r_emailaddress', 'r_liteprofile'] }))
+
+router.get("/linkedin/callback",
+passport.authenticate("linkedin", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed",
-  }),()=>{console.log("check 2")}
+  })
+// (req, res) => {
+//   console.log("req+++++++", req.body)
+// }
 );
 
 export default router
