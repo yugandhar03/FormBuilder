@@ -15,7 +15,18 @@ const Login = () => {
     const [user, setUser] = useState(initialState);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    
+    const google = () => {
+        window.open("http://localhost:5000/auth/google", "_self");
+      };
+    
+      const linkdin = () => {
+        window.open("http://localhost:5000/auth/linkedin", "_self");
+      };
+    
+      const facebook = () => {
+        window.open("http://localhost:5000/auth/facebook", "_self");
+      };
     const handleChange = (e) =>
     setUser({ ...user, [e.target.name]: e.target.value });
 
@@ -34,9 +45,9 @@ const Login = () => {
                         <h4 className="social-media-title">Login</h4>
 
                         <div className="get-start-btn">
-                            <button>Gmail</button>
-                            <button>FaceBook</button>
-                            <button>Linkdin</button>
+                            <button onClick={google}>Gmail</button>
+                            <button onClick={facebook}>FaceBook</button>
+                            <button onClick={linkdin}>Linkdin</button>
                         </div>
                         <div>
                             <label>Email</label><br />
