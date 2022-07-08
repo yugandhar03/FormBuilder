@@ -4,6 +4,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import SignUp from "./Components/Auth/SignUp";
 import Login from "./Components/Auth/Login";
 import ForgotPassword from "./Components/Auth/ForgotPassword";
+import PasswordReset from "./Components/Auth/PasswordReset"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -15,6 +16,7 @@ function App() {
       <Route exact path='/' element = {<Login/>}/>
       <Route path ='/signup' element={<SignUp/>}/>
       <Route path='/forgot' element = {<ForgotPassword/>}/>
+      <Route path="/passwordreset/:id/:token" element={<PasswordReset />} />
     </Routes>
       {/* <SignUp /> */}
       {/* <Login/> */}
