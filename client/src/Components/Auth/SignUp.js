@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link,useNavigate  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SiCodeigniter } from 'react-icons/si'
 import { signup } from "../../redux/actions/UserAction";
 import { useDispatch } from "react-redux";
@@ -7,35 +7,40 @@ import { useDispatch } from "react-redux";
 import "./style.css";
 const initialState = {
   email: "",
-  fullname:"",
+  fullname: "",
   password: "",
 };
 
 const SignUp = () => {
   const [isemailexists, setIsEmailexists] = useState(true)
   const [user, setUser] = useState(initialState);
+  const [formErrors, setFormErrors] = useState()
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const handleContinue = () => {
-    setIsEmailexists(false)
+    var validRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (user.email.match(validRegex)) {
+      setIsEmailexists(false)
+    } else {
+      setFormErrors("Invalid email address!");
+    }
+
   }
 
-const handleChange = (e) =>
+  const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
-  
-const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log(user)
-      dispatch(signup(user, navigate));
-    };
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signup(user, navigate));
+  };
   return (
     <div className="container">
       <div className="form-container">
         <div>
           <h3 className="brand-log"><SiCodeigniter /> Ignite</h3>
-          {/* <img width="150" src={Ignite_logo} alt="BrangImage" /> */}
-
           <div>
             <h5 className="social-media-title">Get Started With Ignite</h5>
             {
@@ -50,10 +55,12 @@ const handleSubmit = (e) => {
                     <div>
                       <label>Email</label>
                     </div>
-                    <input className="form-input"
+                    <input className={formErrors ? "error" : "form-input"}
                       type="text"
                       name="email"
                       onChange={handleChange} />
+                    {formErrors ? <p className="error-message">{formErrors}</p> : null}
+
                     <button className="submit-button" type="submit" onClick={handleContinue}>Continue</button>
                     <div className="form-footer">
                       <p>Already use Ignite? <Link to="/">Login</Link></p>
@@ -80,17 +87,11 @@ const handleSubmit = (e) => {
             }
           </div>
         </div>
-
-
-
-
         <div className="privacy-policy">
           <p>By registering, you agree to our <strong>Terms of Service</strong> and <strong> Privacy Policy.</strong></p>
         </div>
-
       </div>
     </div>
   )
 }
-
 export default SignUp

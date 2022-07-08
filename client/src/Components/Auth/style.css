@@ -80,3 +80,27 @@
     color: #333333cf;
     font-size: 14px;
 }
+.error-message{
+    font-size: 13px;
+    color: #e90e0eed;
+}
+.error{
+    outline: 1px solid #e90e0eed;
+    border:none;
+    padding: 13px 13px;
+    width: 369px;
+    border-radius: 5px;
+    /* border: 1px solid #333333a6; */
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+.error:focus{
+    outline: 1px solid #e90e0eed;
+    border:none;
+    padding: 13px 13px;
+    width: 369px;
+    border-radius: 5px;
+    /* border: 1px solid #333333a6; */
+    margin-top: 10px;
+    margin-bottom: 25px;
+}

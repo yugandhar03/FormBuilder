@@ -1,7 +1,10 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import nodemailer from "nodemailer";
+import mongoose from "mongoose";
 
 import UserModal from "../models/user.js";
+import TokenModal from "../models/Tokens.js"
 
 const secret = 'test';
 
@@ -19,15 +22,15 @@ export const signin = async (req, res) => {
 
         const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, { expiresIn: "1h" });
 
-       return res.status(200).json({ result: oldUser, token });
+        return res.status(200).json({ result: oldUser, token });
     } catch (err) {
         res.status(500).json({ message: "Something went wrong" });
     }
-    
+
 };
 
 export const signup = async (req, res) => {
-    const { email,fullname, password } = req.body;
+    const { email, fullname, password } = req.body;
 
     try {
         const oldUser = await UserModal.findOne({ email });
@@ -47,3 +50,4 @@ export const signup = async (req, res) => {
         console.log(error);
     }
 };
+
