@@ -49,7 +49,6 @@ passport.use(
     },
     function (accessToken, refreshToken, profile, done) {
       done(null, profile);
-      console.log("facebook======",profile)
       SocialMediaUser.findOne({profileId:profile.id}).then((currentSocialMediaUser)=>{
         if(currentSocialMediaUser){
            console.log("user alerady exsit")
@@ -73,12 +72,24 @@ passport.use(
       clientID: LINKEDIN_CLIENT_ID,
       clientSecret: LINKEDIN_CLIENT_SECRET,
       callbackURL: "/auth/linkedin/callback",
+      scope: ['r_emailaddress', 'r_liteprofile']
     },
     function (accessToken, refreshToken, profile, done) {
-      console.log("linkedin===",callbackURL)
       done(null, profile);
-      console.log("linkedin===",callbackURL)
-
+      SocialMediaUser.findOne({profileId:profile.id}).then((currentSocialMediaUser)=>{
+        if(currentSocialMediaUser){
+           console.log("user alerady exsit")
+        }else{ 
+          new SocialMediaUser({
+            username:profile.displayName,
+            profileId:profile.id,
+            provider:profile.provider
+          }).save().then((newSocialMediaUser)=>{
+            console.log("new user created:"+ newSocialMediaUser)
+          })
+        }
+      })
+    
     }
   )
 );
