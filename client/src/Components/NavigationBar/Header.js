@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import {Link} from "react-router-dom"
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -14,18 +15,17 @@ function Header() {
           <Nav className="me-auto">
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
-          
           </Nav>
           <Nav>
             <Nav.Link href="#deets">More deets</Nav.Link>
             <NavDropdown title="Profile" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Account Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+              <NavDropdown.Item><Link to="/profile">Account Settings</Link></NavDropdown.Item>
+              <NavDropdown.Item>
                 Another action
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Item >Something</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
+              <NavDropdown.Item >
                 Separated link
               </NavDropdown.Item>
             </NavDropdown>

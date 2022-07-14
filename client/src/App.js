@@ -5,7 +5,8 @@ import SignUp from "./Components/Auth/SignUp";
 import Login from "./Components/Auth/Login";
 import ForgotPassword from "./Components/Auth/ForgotPassword";
 import Home from "./Components/Pages/Home";
-import PasswordReset from "./Components/Auth/PasswordReset"
+import PasswordReset from "./Components/Auth/PasswordReset";
+import AccountSettings from "./Components/Pages/AccountSettings.js";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -19,6 +20,7 @@ function App() {
       <Route path='/home' element = {<Home/>}/>
       <Route path ='/signup' element={<SignUp/>}/>
       <Route path='/forgot' element = {<ForgotPassword/>}/>
+      <Route path='/profile' element = {<AccountSettings/>}/>
       <Route path="/passwordreset/:id/:token" element={<PasswordReset />} />
     </Routes>
       {/* <SignUp /> */}

@@ -1,0 +1,17 @@
+.form-input{
+    padding: 13px 13px;
+    width: 369px;
+    border-radius: 5px;
+    border: 1px solid #333333a6;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.save-button{
+    border: none;
+    border-radius: 9px;
+    font-size: 17px;
+    padding: 9px 47px;
+    color: #f8f8f9;
+    background-color: #333333f7;
+    margin-bottom: 20px;
+}

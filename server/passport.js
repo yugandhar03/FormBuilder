@@ -1,5 +1,5 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20"
-import {Strategy as LinkedInStrategy} from "passport-linkedin-oauth2"
+import { Strategy as LinkedInStrategy } from "passport-linkedin-oauth2"
 import { Strategy as FacebookStrategy } from "passport-facebook"
 import passport from "passport";
 import SocialMediaUser from "./models/social_media_user.js"
@@ -22,20 +22,20 @@ passport.use(
     },
     function (accessToken, refreshToken, profile, done) {
       done(null, profile);
-      SocialMediaUser.findOne({profileId:profile.id}).then((currentSocialMediaUser)=>{
-       if(currentSocialMediaUser){
+      SocialMediaUser.findOne({ profileId: profile.id }).then((currentSocialMediaUser) => {
+        if (currentSocialMediaUser) {
           console.log("user alerady exsit")
-       }else{
-        new SocialMediaUser({
-          username:profile.displayName,
-          profileId:profile.id,
-          provider:profile.provider
-        }).save().then((newSocialMediaUser)=>{
-          console.log("new user created:"+ newSocialMediaUser)
-        })
-       }
+        } else {
+          new SocialMediaUser({
+            username: profile.displayName,
+            profileId: profile.id,
+            provider: profile.provider
+          }).save().then((newSocialMediaUser) => {
+            console.log("new user created:" + newSocialMediaUser)
+          })
+        }
       })
-     
+
     }
   )
 );
@@ -49,16 +49,16 @@ passport.use(
     },
     function (accessToken, refreshToken, profile, done) {
       done(null, profile);
-      SocialMediaUser.findOne({profileId:profile.id}).then((currentSocialMediaUser)=>{
-        if(currentSocialMediaUser){
-           console.log("user alerady exsit")
-        }else{ 
+      SocialMediaUser.findOne({ profileId: profile.id }).then((currentSocialMediaUser) => {
+        if (currentSocialMediaUser) {
+          console.log("user alerady exsit")
+        } else {
           new SocialMediaUser({
-            username:profile.displayName,
-            profileId:profile.id,
-            provider:profile.provider
-          }).save().then((newSocialMediaUser)=>{
-            console.log("new user created:"+ newSocialMediaUser)
+            username: profile.displayName,
+            profileId: profile.id,
+            provider: profile.provider
+          }).save().then((newSocialMediaUser) => {
+            console.log("new user created:" + newSocialMediaUser)
           })
         }
       })
@@ -76,32 +76,32 @@ passport.use(
     },
     function (accessToken, refreshToken, profile, done) {
       done(null, profile);
-      SocialMediaUser.findOne({profileId:profile.id}).then((currentSocialMediaUser)=>{
-        if(currentSocialMediaUser){
-           console.log("user alerady exsit")
-        }else{ 
+      SocialMediaUser.findOne({ profileId: profile.id }).then((currentSocialMediaUser) => {
+        if (currentSocialMediaUser) {
+          console.log("user alerady exsit")
+        } else {
           new SocialMediaUser({
-            username:profile.displayName,
-            profileId:profile.id,
-            provider:profile.provider
-          }).save().then((newSocialMediaUser)=>{
-            console.log("new user created:"+ newSocialMediaUser)
+            username: profile.displayName,
+            profileId: profile.id,
+            provider: profile.provider
+          }).save().then((newSocialMediaUser) => {
+            console.log("new user created:" + newSocialMediaUser)
           })
         }
       })
-    
+
     }
   )
 );
 
 passport.serializeUser((user, done) => {
   done(null, user);
- 
+
 });
 
 passport.deserializeUser((user, done) => {
   done(null, user);
- 
+
 });
 
 

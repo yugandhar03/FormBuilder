@@ -5,7 +5,6 @@ const router = express.Router();
 const CLIENT_URL = "http://localhost:3000/home";
 
 router.get("/login/success", (req, res) => {
-  console.log("s=", req)
   if (req.user) {
     res.status(200).json({
       success: true,
@@ -56,10 +55,6 @@ passport.authenticate("linkedin", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed",
   })
-// (req, res) => {
-//   console.log("req+++++++", req.body)
-// }
-
 );
 
 export default router
