@@ -1,10 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import * as api from '../../redux/api/index'
 import axios from 'axios'
-// import { verifylink,updatepassword } from "../../redux/actions/UserAction";
 import { useParams, useNavigate } from "react-router-dom";
 import { SiCodeigniter } from 'react-icons/si';
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+
 
 const PasswordReset = () => {
     const [validUrl, setValidUrl] = useState(false);

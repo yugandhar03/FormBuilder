@@ -43,7 +43,7 @@
     border-radius: 5px;
     border: 1px solid #333333a6;
     margin-top: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .form-footer {
@@ -83,6 +83,12 @@
 .error-message{
     font-size: 13px;
     color: #e90e0eed;
+    font-weight: bolder;
+}
+.success-message{
+    font-size: 13px;
+    color: #333;
+    font-weight: bolder;
 }
 .error{
     outline: 1px solid #e90e0eed;

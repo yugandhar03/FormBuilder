@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SiCodeigniter } from 'react-icons/si'
-import { signup } from "../../redux/actions/UserAction";
-import { useDispatch } from "react-redux";
+import { signup, emailvalidate } from "../../redux/actions/UserAction";
+import { useDispatch, useSelector } from "react-redux";
+import * as api from '../../redux/api/index'
 
 import "./style.css";
+
 const initialState = {
   email: "",
   fullname: "",
@@ -14,14 +16,26 @@ const initialState = {
 const SignUp = () => {
   const [isemailexists, setIsEmailexists] = useState(true)
   const [user, setUser] = useState(initialState);
-  const [formErrors, setFormErrors] = useState()
+  const [formErrors, setFormErrors] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     var validRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     if (user.email.match(validRegex)) {
-      setIsEmailexists(false)
+    } else {
+      setFormErrors("Invalid email address!");
+    }
+    try {
+      await api.emailvalidate(user);
+      setIsEmailexists(false);
+      console.log('')
+    } catch (error) {
+      setIsEmailexists(true);
+      setFormErrors("Email Address Already Exist  "); 
+    }
+    var validRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (user.email.match(validRegex)) {
     } else {
       setFormErrors("Invalid email address!");
     }
@@ -59,8 +73,7 @@ const SignUp = () => {
                       type="text"
                       name="email"
                       onChange={handleChange} />
-                    {formErrors ? <p className="error-message">{formErrors}</p> : null}
-
+                    {formErrors && <p className="error-message">{formErrors}</p>}
                     <button className="submit-button" type="submit" onClick={handleContinue}>Continue</button>
                     <div className="form-footer">
                       <p>Already use Ignite? <Link to="/">Login</Link></p>
