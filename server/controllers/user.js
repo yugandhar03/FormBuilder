@@ -42,7 +42,7 @@ export const signup = async (req, res) => {
         if (oldUser) return res.status(400).json({ error_message: "User already exists" });
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const result = await UserModal.create({ email, password: hashedPassword, fullname: fullname });
+        const result = await UserModal.create({ email, password: hashedPassword, fullname: fullname , provider:"Email",profileId:null});
 
         const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
 

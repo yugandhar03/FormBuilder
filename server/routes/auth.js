@@ -1,5 +1,5 @@
 import express from "express";
-import passport from "../passport.js";
+import passport from "../controllers/passport.js";
 
 const router = express.Router();
 const CLIENT_URL = "http://localhost:3000/home";
@@ -29,7 +29,7 @@ router.get("/logout", (req, res) => {
   res.redirect(CLIENT_URL);
 });
 
-router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
+router.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 
 router.get("/google/callback", passport.authenticate("google", {
   successRedirect: CLIENT_URL,
