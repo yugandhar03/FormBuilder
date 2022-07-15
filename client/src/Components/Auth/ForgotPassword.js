@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { forgotpassword } from "../../redux/actions/UserAction";
-import { Link, useNavigate } from 'react-router-dom';
+import { forgotpassword } from "../../redux/actions/ForgotPass.js";
 import { useDispatch, useSelector } from "react-redux";
 import { SiCodeigniter } from 'react-icons/si';
 
@@ -10,29 +9,29 @@ const initialState = {
     email: ""
 };
 const ForgotPassword = () => {
+    const userstatus = useSelector((state) => state.ForgotReducer);
     const [user, setUser] = useState(initialState);
     const [message, setMessage] = useState()
     const [error_msg, setErrorMsg] = useState()
-    const userstatus = useSelector((state) => state.UserReducer);
- 
-    const navigate = useNavigate()
     const dispatch = useDispatch()
+
+     
     const handleChange = (e) =>
         setUser({ ...user, [e.target.name]: e.target.value });
+
     const onSubmit = e => {
-        e.preventDefault();
-        dispatch(forgotpassword(user, navigate));
+        e.preventDefault();      
+        dispatch(forgotpassword(user));
     };
+
     useEffect(() => {
-        if (userstatus.errors) {
-            let message_status = userstatus.errors.message;
-            let error_status = userstatus.errors.error_message;
+        if (userstatus.validate) {
+            let message_status = userstatus.validate.message;
+            let error_status = userstatus.validate.error_message;
             setMessage(message_status)
             setErrorMsg(error_status)
         }
     })
-
-
     return (
         <div className="container">
             <div className="form-container">
@@ -44,13 +43,12 @@ const ForgotPassword = () => {
                         <div>
                             <label>Email Address</label><br />
                             <input className="form-input" type="email" name="email"
-                                // onChange={(e) => setUser(e.target.value)}
                                 onChange={handleChange} />
-                            {error_msg && <p className = "error-message">{error_msg}</p>}
-                            {message && <p className = "success-message" >{message}</p>}
+                            {error_msg && <p className="error-message">{error_msg}</p>}
+                            {message && <p className="success-message" >{message}</p>}
                             <button className="reset-button" type="submit" onClick={onSubmit}>Send Password Reset Email</button>
                             <div className="form-footer">
-                                <Link to="/">Take me back to Login</Link>
+                                <a href="/">Take me back to Login</a>
                             </div>
                         </div>
                     </div>

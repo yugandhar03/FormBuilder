@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { UpdateUser } from '../../redux/actions/UserAction.js';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useState } from 'react';
+import {UpdateUser} from '../../redux/actions/UserAction.js';
+import {useDispatch, useSelector} from 'react-redux';
 import "./PagesStyle.css";
 import NavTabs from "../NavigationBar/NavTabs.js";
 import Header from "../NavigationBar/Header";

@@ -1,4 +1,4 @@
-import { AUTH,RESETPASS,UPDATEUSER } from '../constants/actionTypes';
+import { AUTH,UPDATEUSER } from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
 export const signin = (formData, router) => async (dispatch) => {
@@ -18,9 +18,7 @@ export const signin = (formData, router) => async (dispatch) => {
 export const signup = (formData, router) => async (dispatch) => {
     try {
         const { data } = await api.signUp(formData);
-
         dispatch({ type: AUTH, data });
-
         router('/');
     } catch (error) {
         const {data} = error.response
@@ -40,16 +38,6 @@ export const UpdateUser = (formData) => async (dispatch) => {
     }   
 };
 
-export const forgotpassword = (formData, navigate) => async (dispatch) => {
-    try {
-        const { data } = await api.forgotpassword(formData);
-
-        dispatch({ type: AUTH, data});
-    } catch (error) {
-        const {data} = error.response
-        dispatch({ type: AUTH, data });
-    }
-};
 
 export const emailvalidate = (formData) => async (dispatch) => {
      try {
