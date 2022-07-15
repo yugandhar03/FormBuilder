@@ -1,12 +1,12 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import * as api from '../../redux/api/index'
-import axios from 'axios'
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { SiCodeigniter } from 'react-icons/si';
 
 
 const PasswordReset = () => {
-    const [validUrl, setValidUrl] = useState(false);
+    const [validUrl, setValidUrl] = useState();
+    const [notvalidUrl, setNotValidUrl] = useState();
     const [password, setPassword] = useState("");
     const [msg, setMsg] = useState("");
     const [error, setError] = useState("");
@@ -18,7 +18,7 @@ const PasswordReset = () => {
                 await api.verifylink(user_id);
                 setValidUrl(true);
             } catch (error) {
-                setValidUrl(false);
+                setNotValidUrl(true);
             }
         };
         verifyUrl();
@@ -45,7 +45,7 @@ const PasswordReset = () => {
     };
     return (
         <Fragment>
-            {validUrl ? (
+            {validUrl &&(
                 <div className="container">
                     <div className="form-container">
                         <div>
@@ -70,9 +70,8 @@ const PasswordReset = () => {
                         </div>
                     </div>
                 </div >
-            ) : (
-                <h1>404 Not Found</h1>
             )}
+            {notvalidUrl && <h1>404 Not Found</h1>}
         </Fragment>
     )
 }

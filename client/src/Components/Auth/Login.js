@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SiCodeigniter } from 'react-icons/si'
 import { signin } from "../../redux/actions/UserAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,10 +13,9 @@ const initialState = {
 
 const Login = () => {
     const [user, setUser] = useState(initialState);
-    const [message, setMessage] = useState()
+    // const [message, setMessage] = useState()
     const [error_msg, setErrorMsg] = useState()
     const loginstatus = useSelector((state) => state.UserReducer);
-    console.log(loginstatus)
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -41,15 +40,13 @@ const Login = () => {
 
     useEffect(() => {
         if (loginstatus.errors) {
-            let message_status = loginstatus.errors.message;
+            // let message_status = loginstatus.errors.message;
             let error_status = loginstatus.errors.error_message;
-            setMessage(message_status)
+            // setMessage(message_status)
             setErrorMsg(error_status)
         }
     })
-    if (message) {
-        console.log('profile', loginstatus)
-    }
+    
     return (
         <div className="container">
             <div className="form-container">
@@ -75,11 +72,11 @@ const Login = () => {
                                 name="password"
                                 onChange={handleChange} />
                             {error_msg && <p className="error-message">{error_msg}</p>}
-                            {message && <p className="success-message" >{message}</p>}
+                            {/* {message && <p className="success-message" >{message}</p>} */}
                             <button className="submit-button" type="submit" onClick={handleSubmit}>Continue</button>
                             <div className="form-footer">
-                                <Link to="/signup">Create an account</Link>
-                                <Link to="/forgot">Forgot your Password? </Link>
+                                <a href="/signup">Create an account</a>
+                                <a href="/forgot">Forgot your Password? </a>
                             </div>
                         </div>
                     </div>
