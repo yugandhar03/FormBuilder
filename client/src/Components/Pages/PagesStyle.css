@@ -15,3 +15,13 @@
     background-color: #333333f7;
     margin-bottom: 20px;
 }
+.get-connected-btn{
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 6px 30px;
+    color: #f8f8f9;
+    background-color: #333333f7;
+    display: block;
+    margin-bottom: 10px;
+}
