@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SiCodeigniter } from 'react-icons/si'
-import { signup, emailvalidate } from "../../redux/actions/UserAction";
-import { useDispatch, useSelector } from "react-redux";
-import * as api from '../../redux/api/index'
+import { signup } from "../../redux/actions/UserAction";
+import { useDispatch } from "react-redux";
+import * as api from '../../redux/api/index';
+import validator from 'validator';
 
 import "./style.css";
 
@@ -21,34 +22,45 @@ const SignUp = () => {
   const dispatch = useDispatch();
 
   const handleContinue = async () => {
-    var validRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    if (user.email.match(validRegex)) {
-    } else {
-      setFormErrors("Invalid email address!");
-    }
     try {
       await api.emailvalidate(user);
       setIsEmailexists(false);
-      console.log('')
+      setFormErrors("")
     } catch (error) {
       setIsEmailexists(true);
-      setFormErrors("Email Address Already Exist  "); 
+      setFormErrors("Email Address Already Exist");
     }
     var validRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     if (user.email.match(validRegex)) {
+
     } else {
+      setIsEmailexists(true);
       setFormErrors("Invalid email address!");
     }
 
   }
 
   const handleChange = (e) => {
+    setFormErrors("")
     setUser({ ...user, [e.target.name]: e.target.value });
   }
 
+  const validate = (value) => {
+
+    if (validator.isStrongPassword(value, {
+      minLength: 8, minLowercase: 1,
+      minUppercase: 1, minNumbers: 1, minSymbols: 1
+    })) {
+   
+      dispatch(signup(user, navigate));
+
+    } else {
+      setFormErrors('Is Not Strong Password')
+    }
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signup(user, navigate));
+    validate(user.password)
   };
   return (
     <div className="container">
@@ -76,8 +88,8 @@ const SignUp = () => {
                     {formErrors && <p className="error-message">{formErrors}</p>}
                     <button className="submit-button" type="submit" onClick={handleContinue}>Continue</button>
                     <div className="form-footer">
-                      <p>Already use Ignite? <Link to="/">Login</Link></p>
-                      <Link to="/forgot">Forgot your Password? </Link>
+                      <p>Already use Ignite? <a to="/">Login</a></p>
+                      <a href="/forgot">Forgot your Password? </a>
                     </div>
                   </div>
                 </>
@@ -94,6 +106,7 @@ const SignUp = () => {
                       type="password"
                       name="password"
                       onChange={handleChange} />
+                    {formErrors && <p className="error-message">{formErrors}</p>}
                     <button className="submit-button" type="submit" onClick={handleSubmit} >Continue</button>
                   </div>
                 </>

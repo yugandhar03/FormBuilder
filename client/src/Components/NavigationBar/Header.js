@@ -1,38 +1,79 @@
-import React from "react";
-import {Link} from "react-router-dom"
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import React,{ useState} from "react";
+import { NavLink } from "react-router-dom";
+import {FaBars} from "react-icons/fa";
+import { SiCodeigniter } from 'react-icons/si';
+import {ImCross} from "react-icons/im"
+import {Container} from 'react-bootstrap';
+import './NavStyle.css'
+
 
 function Header() {
+  const [click, setClick] = useState(false);
+
+  const handleClick = () => setClick(!click);
+  const Close = () => setClick(false);
+
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-          </Nav>
-          <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
-            <NavDropdown title="Profile" id="collasible-nav-dropdown">
-              <NavDropdown.Item><Link to="/profile">Account Settings</Link></NavDropdown.Item>
-              <NavDropdown.Item>
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item >Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item >
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <div>
+      <div className={click ? "main-container" : ""} onClick={() => Close()} />
+      <nav className="navbar" onClick={e => e.stopPropagation()}>
+        <div className="nav-container">
+          <NavLink exact to="/" className="nav-logo">
+            Ignite
+            <SiCodeigniter/>
+          </NavLink>
+          <ul className={click ? "nav-menu active" : "nav-menu"}>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/"
+                activeClassName="active"
+                className="nav-links"
+                onClick={click ? handleClick : null}
+              >
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/about"
+                activeClassName="active"
+                className="nav-links"
+                onClick={click ? handleClick : null}
+              >
+                About
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/blog"
+                activeClassName="active"
+                className="nav-links"
+                onClick={click ? handleClick : null}
+              >
+                Blog
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/contact"
+                activeClassName="active"
+                className="nav-links"
+                onClick={click ? handleClick : null}
+              >
+                Contact Us
+              </NavLink>
+            </li>
+          </ul>
+          <div className="nav-icon" onClick={handleClick}>
+            {click ? <ImCross/> : <FaBars/> }
+          </div>
+        </div>
+      </nav>
+    </ div>
   );
 }
 

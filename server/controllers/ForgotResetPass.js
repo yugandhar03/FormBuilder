@@ -37,7 +37,6 @@ export const forgotpassword = async (req, res) => {
                 pass: 'gljehqrowtvcxydm'
             }
         });
-
         var mailOptions = {
             from: 'ramasaniasha@gmail.com',
             to: email,
@@ -49,7 +48,6 @@ export const forgotpassword = async (req, res) => {
             <a href="${url}">Link</a>
             `,
         };
-
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 res.status(400).json({ status: false, error_message: 'Email not sent' })
