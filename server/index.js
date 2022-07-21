@@ -26,7 +26,7 @@ app.use("/auth", authRoute);
 
 app.use("/user", userRouter);
 
-const CONNECTION_URL = "mongodb+srv://yugandhar:7032292232@resumebuilder.b0qpp.mongodb.net/?retryWrites=true&w=majority";
+const CONNECTION_URL = "mongodb+srv://ashalatha:ashalatha@cluster0.qxfebpc.mongodb.net/?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 
 mongoose

@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import * as api from '../../redux/api/index'
 import { useParams } from "react-router-dom";
 import { SiCodeigniter } from 'react-icons/si';
+import validator from 'validator';
 
 
 const PasswordReset = () => {
@@ -23,29 +24,49 @@ const PasswordReset = () => {
         };
         verifyUrl();
     }, [user_id]);
+    // const validate = (value) => {
+
+    //     if (validator.isStrongPassword(value, {
+    //         minLength: 8, minLowercase: 1,
+    //         minUppercase: 1, minNumbers: 1, minSymbols: 1
+    //     })) {
+    //         setFormErrors(null)
+
+    //     } else {
+    //         setFormErrors('Is Not Strong Password')
+    //     }
+    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const formData = { id: user_id.id, token: user_id.token, password: password }
-            const { data } = await api.updatepassword(formData);
-            setMsg(data.message);
-            setError("");
-            window.location = "/";
-        } catch (error) {
-            if (
-                error.response &&
-                error.response.status >= 400 &&
-                error.response.status <= 500
-            ) {
-                setError(error.response.data.message);
-                setMsg("");
+        if (validator.isStrongPassword(password, {
+            minLength: 8, minLowercase: 1,
+            minUppercase: 1, minNumbers: 1, minSymbols: 1
+        })) {
+            try {
+                const formData = { id: user_id.id, token: user_id.token, password: password }
+                const { data } = await api.updatepassword(formData);
+                setMsg(data.message);
+                setError("");
+                window.location = "/";
+            } catch (error) {
+                if (
+                    error.response &&
+                    error.response.status >= 400 &&
+                    error.response.status <= 500
+                ) {
+                    setError(error.response.data.message);
+                    setMsg("");
+                }
             }
+
+        } else {
+            setError('Is Not Strong Password')
         }
     };
     return (
         <Fragment>
-            {validUrl &&(
+            {validUrl && (
                 <div className="container">
                     <div className="form-container">
                         <div>

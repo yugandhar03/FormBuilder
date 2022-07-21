@@ -15,12 +15,12 @@ const ForgotPassword = () => {
     const [error_msg, setErrorMsg] = useState()
     const dispatch = useDispatch()
 
-     
+
     const handleChange = (e) =>
         setUser({ ...user, [e.target.name]: e.target.value });
 
     const onSubmit = e => {
-        e.preventDefault();      
+        e.preventDefault();
         dispatch(forgotpassword(user));
     };
 
