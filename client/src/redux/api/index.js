@@ -11,3 +11,7 @@ export const forgotpassword = (formData) => API.post("/user/forgotpassword", for
 export const verifylink = (formData) => API.post("/user/verifylink", formData);
 export const updatepassword = (formData) => API.post("/user/updatepassword", formData);
 export const deleteAccount = (formData) => API.post("/user/deleteAccount", formData);
+export const googleApi   =  `http://localhost:5000/auth/google`;
+export const facebookApi =  `http://localhost:5000/auth/facebook`;
+export const linkedinApi =  `http://localhost:5000/auth/linkedin`;
+

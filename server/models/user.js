@@ -5,8 +5,13 @@ const userSchema = mongoose.Schema({
     fullname: { type: String, required: true },
     password: { type: String, required: false},
     id: { type: String },
-    profileId:{type:String},
-    provider:{type:String},
+   
+    provider:[{
+        isActive:{type:Boolean},
+        name:{type:String},
+        provider:{type:String},
+        profileId:{type:String},
+    }],
 });
 
 
