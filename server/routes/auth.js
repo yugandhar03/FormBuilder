@@ -1,5 +1,6 @@
 import express from "express";
 import passport from "../controllers/passport.js";
+import {googleData,googleCallback,facebookData,facebookCallback, linkedinCallback, linkedinData} from "./socialMedia.js";
 
 const router = express.Router();
 const CLIENT_URL = "http://localhost:3000/home";
@@ -29,32 +30,16 @@ router.get("/logout", (req, res) => {
   res.redirect(CLIENT_URL);
 });
 
-router.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+router.get('/google', googleData);
 
-router.get("/google/callback", passport.authenticate("google", {
-  successRedirect: CLIENT_URL,
-  failureRedirect: "/login/failed",
-})
+router.get("/google/callback",googleCallback);
 
-);
+router.get("/facebook", facebookData);
 
-router.get("/facebook", passport.authenticate("facebook", { scope: "email" }));
+router.get("/facebook/callback",facebookCallback);
 
-router.get("/facebook/callback", passport.authenticate("facebook", {
-  successRedirect: CLIENT_URL,
-  failureRedirect: "/login/failed",
-})
-);
+router.get("/linkedin",linkedinData)
 
-
-
-router.get("/linkedin", passport.authenticate("linkedin", { scope: ['r_emailaddress', 'r_liteprofile'] }))
-
-router.get("/linkedin/callback",
-passport.authenticate("linkedin", {
-    successRedirect: CLIENT_URL,
-    failureRedirect: "/login/failed",
-  })
-);
+router.get("/linkedin/callback",linkedinCallback);
 
 export default router

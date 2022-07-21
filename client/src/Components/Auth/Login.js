@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { SiCodeigniter } from 'react-icons/si'
 import { signin } from "../../redux/actions/UserAction";
 import { useDispatch, useSelector } from "react-redux";
+import * as api from '../../redux/api/index';
+
 
 import "./style.css";
 
@@ -18,17 +20,18 @@ const Login = () => {
     const loginstatus = useSelector((state) => state.UserReducer);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+  
+    
     const google = () => {
-        window.open("http://localhost:5000/auth/google", "_self");
+        window.open(api.googleApi, "_self");
     };
 
     const linkdin = () => {
-        window.open("http://localhost:5000/auth/linkedin", "_self");
+        window.open(api.linkedinApi, "_self");
     };
 
     const facebook = () => {
-        window.open("http://localhost:5000/auth/facebook", "_self");
+        window.open(api.facebookApi, "_self");
     };
     const handleChange = (e) =>
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -54,8 +57,9 @@ const Login = () => {
                     <h3 className="brand-log"><SiCodeigniter /> Ignite</h3>
                     <div>
                         <h4 className="social-media-title">Login</h4>
-
+                     
                         <div className="get-start-btn">
+                        
                             <button onClick={google}>Gmail</button>
                             <button onClick={facebook}>FaceBook</button>
                             <button onClick={linkdin}>Linkdin</button>
