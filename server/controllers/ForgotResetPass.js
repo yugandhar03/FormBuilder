@@ -108,3 +108,30 @@ export const updatepassword = async (req, res) => {
         console.log(error);
     }
 };
+
+export const deleteAccount = async (req, res) => {
+    const {id,fullname,email} = req.body
+    // console.log(req)
+
+    try {
+        const user = await UserModal.findOne({email});
+        // if (user) return res.status(400).send({ message: "Invalid link" });
+
+        // const token = await TokenModal.findOne({
+        //     userId: user._id,
+        //     token: req.body.token,
+        // });
+        // if (!token) return res.status(400).send({ message: "Invalid link" });
+        // const hashedPassword = await bcrypt.hash(req.body.password, 12);
+        // user.password = hashedPassword;
+     
+        // await user.save();
+        await user.remove();
+
+        res.status(200).send({ message: "Account deleted successfully" });
+
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong" });
+        console.log(error);
+    }
+};

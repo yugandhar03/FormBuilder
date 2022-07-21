@@ -10,3 +10,4 @@ export const emailvalidate = (formData) => API.post("/user/emailvalidate", formD
 export const forgotpassword = (formData) => API.post("/user/forgotpassword", formData);
 export const verifylink = (formData) => API.post("/user/verifylink", formData);
 export const updatepassword = (formData) => API.post("/user/updatepassword", formData);
+export const deleteAccount = (formData) => API.post("/user/deleteAccount", formData);
