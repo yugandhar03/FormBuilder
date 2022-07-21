@@ -1,17 +1,19 @@
-import React,{ useState} from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import {FaBars} from "react-icons/fa";
+import { FaBars, FaUserAlt } from "react-icons/fa";
 import { SiCodeigniter } from 'react-icons/si';
-import {ImCross} from "react-icons/im"
-import {Container} from 'react-bootstrap';
+import { ImCross } from "react-icons/im"
+import { Container, Dropdown } from 'react-bootstrap';
 import './NavStyle.css'
-
 
 function Header() {
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
   const Close = () => setClick(false);
+  const handlelagout = () => {
+    localStorage.clear()
+  }
 
   return (
     <div>
@@ -20,7 +22,7 @@ function Header() {
         <div className="nav-container">
           <NavLink exact to="/" className="nav-logo">
             Ignite
-            <SiCodeigniter/>
+            <SiCodeigniter />
           </NavLink>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
@@ -57,19 +59,29 @@ function Header() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink
+              {/* <NavLink
                 exact
-                to="/contact"
+                to="/profile"
                 activeClassName="active"
                 className="nav-links"
                 onClick={click ? handleClick : null}
               >
-                Contact Us
-              </NavLink>
+                profile
+              </NavLink> */}
+              <Dropdown>
+                <Dropdown.Toggle>
+                  <FaUserAlt />
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item href="/profile">My Account</Dropdown.Item>
+                  <Dropdown.Item href="#/action-2">Subscription</Dropdown.Item>
+                  <Dropdown.Item href="/" onClick={handlelagout}>Logout</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
-            {click ? <ImCross/> : <FaBars/> }
+            {click ? <ImCross /> : <FaBars />}
           </div>
         </div>
       </nav>
